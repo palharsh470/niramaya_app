@@ -22,6 +22,7 @@ export default function TabLayout() {
         name="index"
         options={{
           headerShown:false,
+          title:"Dashboard",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
@@ -31,6 +32,7 @@ export default function TabLayout() {
         name="field-analysis"
         options={{
           headerShown:false,
+          title:"Analysis",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="camera" size={size} color={color} />
           ),
@@ -40,17 +42,19 @@ export default function TabLayout() {
         name="schemes"
         options={{
           headerShown:false,
+          title:"Schemes",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="document-text" size={size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="voice-support"
+        name="ecommerce"
         options={{
           headerShown:false,
+          title:"Mandi",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="mic" size={size} color={color} />
+            <Ionicons name="cart" size={size} color={color} />
           ),
         }}
       />

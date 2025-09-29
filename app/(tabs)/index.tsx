@@ -15,6 +15,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
+import VoiceSupportFAB from '../../components/support';
 import { useFocusEffect } from 'expo-router';
 
 const { width, height } = Dimensions.get('window');
@@ -308,6 +309,7 @@ export default function Dashboard() {
 
   return (
     <View style={styles.container}>
+
       <StatusBar barStyle="light-content" backgroundColor="#2E7D32" />
 
       {/* Header with Gradient Background */}
@@ -727,7 +729,17 @@ export default function Dashboard() {
             </View>
           </View>
         </Animated.View>
+        
+        
       </ScrollView>
+        <View style={{
+          position:"absolute",
+          bottom:0,
+          right:0
+        }}>
+
+        <VoiceSupportFAB />
+        </View>
     </View>
   );
 }

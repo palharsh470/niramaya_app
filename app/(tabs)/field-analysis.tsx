@@ -183,54 +183,61 @@ export default function FieldAnalysis() {
   const analyzeImage = () => {
     setIsAnalyzing(true);
     setAnalysisResult(null);
-    
+
     // Capture current language at the time of analysis
     const currentLanguage = language;
-    
+
     setTimeout(() => {
       const mockResults = [
         {
-          cropType: currentLanguage === 'english' ? 'Wheat' : 'गेहूं',
-          healthScore: 78,
-          diseases: [currentLanguage === 'english' ? 'Minor leaf rust detected' : 'मामूली पत्ती की जंग का पता चला'],
-          recommendations: currentLanguage === 'english' ? [
-            'Apply fungicide spray within 3 days',
-            'Increase watering frequency to twice daily',
-            'Monitor closely for 7-10 days'
-          ] : [
-            '3 दिनों के भीतर कवकनाशी स्प्रे लगाएं',
-            'पानी देने की आवृत्ति दिन में दो बार करें',
-            '7-10 दिनों तक बारीकी से निगरानी करें'
+          cropType: currentLanguage === 'english' ? 'Citrus (Lemon/Orange)' : 'नींबू/संतरा',
+          healthScore: 52,
+          diseases: [
+            currentLanguage === 'english' ? 'Citrus Canker detected' : 'सिट्रस कैंकर का पता चला',
+            currentLanguage === 'english' ? 'Fungal leaf spot infection' : 'फंगल पत्ती धब्बा संक्रमण'
           ],
-          soilQuality: currentLanguage === 'english' ? 'Good' : 'अच्छा',
+          recommendations: currentLanguage === 'english' ? [
+            'Remove and destroy infected leaves immediately',
+            'Apply copper-based fungicide spray every 7-10 days',
+            'Improve air circulation by pruning dense foliage',
+            'Avoid overhead watering to reduce leaf wetness',
+            'Apply balanced NPK fertilizer to strengthen plant immunity'
+          ] : [
+            'संक्रमित पत्तियों को तुरंत हटाएं और नष्ट करें',
+            'हर 7-10 दिनों में तांबा आधारित कवकनाशी स्प्रे लगाएं',
+            'घनी पत्तियों की छंटाई करके हवा का संचार सुधारें',
+            'पत्तियों की नमी कम करने के लिए ऊपर से पानी देने से बचें',
+            'पौधे की प्रतिरक्षा मजबूत करने के लिए संतुलित NPK उर्वरक डालें'
+          ],
+          soilQuality: currentLanguage === 'english' ? 'Moderate' : 'मध्यम',
           nutrientLevels: {
-            nitrogen: 'medium',
-            phosphorus: 'high',
+            nitrogen: 'low',
+            phosphorus: 'medium',
             potassium: 'low'
           }
-        },
-        {
-          cropType: currentLanguage === 'english' ? 'Rice' : 'धान',
-          healthScore: 92,
-          diseases: [currentLanguage === 'english' ? 'No diseases detected' : 'कोई रोग नहीं मिला'],
-          recommendations: currentLanguage === 'english' ? [
-            'Crop is in excellent condition',
-            'Continue current care routine',
-            'Next inspection recommended in 2 weeks'
-          ] : [
-            'फसल उत्कृष्ट स्थिति में है',
-            'वर्तमान देखभाल दिनचर्या जारी रखें',
-            '2 सप्ताह में अगली जांच की सिफारिश की जाती है'
-          ],
-          soilQuality: currentLanguage === 'english' ? 'Excellent' : 'उत्कृष्ट',
-          nutrientLevels: {
-            nitrogen: 'high',
-            phosphorus: 'medium',
-            potassium: 'high'
-          }
         }
+        // {
+        //   cropType: currentLanguage === 'english' ? 'Rice' : 'धान',
+        //   healthScore: 92,
+        //   diseases: [currentLanguage === 'english' ? 'No diseases detected' : 'कोई रोग नहीं मिला'],
+        //   recommendations: currentLanguage === 'english' ? [
+        //     'Crop is in excellent condition',
+        //     'Continue current care routine',
+        //     'Next inspection recommended in 2 weeks'
+        //   ] : [
+        //     'फसल उत्कृष्ट स्थिति में है',
+        //     'वर्तमान देखभाल दिनचर्या जारी रखें',
+        //     '2 सप्ताह में अगली जांच की सिफारिश की जाती है'
+        //   ],
+        //   soilQuality: currentLanguage === 'english' ? 'Excellent' : 'उत्कृष्ट',
+        //   nutrientLevels: {
+        //     nitrogen: 'high',
+        //     phosphorus: 'medium',
+        //     potassium: 'high'
+        //   }
+        // }
       ];
-      
+
       const randomResult = mockResults[Math.floor(Math.random() * mockResults.length)];
       setAnalysisResult(randomResult);
       setIsAnalyzing(false);
@@ -301,12 +308,12 @@ export default function FieldAnalysis() {
   };
 
   const getNutrientWidth = (level: string): string => {
-  const levelStr = level.toLowerCase();
-  if (levelStr.includes('high') || levelStr.includes('उच्च')) return '100%';
-  if (levelStr.includes('medium') || levelStr.includes('मध्यम')) return '60%';
-  if (levelStr.includes('low') || levelStr.includes('कम')) return '30%';
-  return '50%';
-};
+    const levelStr = level.toLowerCase();
+    if (levelStr.includes('high') || levelStr.includes('उच्च')) return '100%';
+    if (levelStr.includes('medium') || levelStr.includes('मध्यम')) return '60%';
+    if (levelStr.includes('low') || levelStr.includes('कम')) return '30%';
+    return '50%';
+  };
 
   const getTranslatedNutrientLevel = (level: string): string => {
     const normalizedLevel = level.toLowerCase();
@@ -319,7 +326,7 @@ export default function FieldAnalysis() {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#2E7D32" />
-      
+
       {/* Header with Gradient Background and Language Toggle */}
       <LinearGradient
         colors={['#4CAF50', '#2E7D32', '#1B5E20']}
@@ -365,12 +372,12 @@ export default function FieldAnalysis() {
         </SafeAreaView>
       </LinearGradient>
 
-      <ScrollView 
+      <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <Animated.View 
+        <Animated.View
           style={[
             styles.contentContainer,
             {
@@ -443,7 +450,7 @@ export default function FieldAnalysis() {
                     </View>
                   )}
                 </View>
-                
+
                 <TouchableOpacity style={styles.resetButton} onPress={resetAnalysis}>
                   <LinearGradient
                     colors={['#F44336', '#D32F2F']}
@@ -461,7 +468,7 @@ export default function FieldAnalysis() {
           {analysisResult && (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>{t.analysisResults}</Text>
-              
+
               {/* Health Overview Card */}
               <View style={styles.resultCard}>
                 <LinearGradient
@@ -474,7 +481,7 @@ export default function FieldAnalysis() {
                     </View>
                     <Text style={styles.resultCardTitle}>{t.cropHealthOverview}</Text>
                   </View>
-                  
+
                   <View style={styles.healthScoreContainer}>
                     <View style={styles.healthScoreCircle}>
                       <Text style={[styles.healthScoreText, { color: getHealthColor(analysisResult.healthScore) }]}>
@@ -507,7 +514,7 @@ export default function FieldAnalysis() {
                     </View>
                     <Text style={styles.resultCardTitle}>{t.diseaseDetection}</Text>
                   </View>
-                  
+
                   <View style={styles.diseaseContainer}>
                     {analysisResult.diseases.map((disease, index) => (
                       <View key={index} style={styles.diseaseItem}>
@@ -531,7 +538,7 @@ export default function FieldAnalysis() {
                     </View>
                     <Text style={styles.resultCardTitle}>{t.nutrientAnalysis}</Text>
                   </View>
-                  
+
                   <View style={styles.nutrientGrid}>
                     {Object.entries(analysisResult.nutrientLevels).map(([nutrient, level]) => (
                       <View key={nutrient} style={styles.nutrientItem}>
@@ -543,14 +550,14 @@ export default function FieldAnalysis() {
                           {getTranslatedNutrientLevel(level)}
                         </Text>
                         <View style={styles.nutrientBar}>
-                          <View 
+                          <View
                             style={[
-                              styles.nutrientBarFill, 
-                              { 
+                              styles.nutrientBarFill,
+                              {
                                 width: getNutrientWidth(level) as import('react-native').DimensionValue,
                                 backgroundColor: getNutrientColor(level)
                               }
-                            ]} 
+                            ]}
                           />
                         </View>
                       </View>
@@ -571,7 +578,7 @@ export default function FieldAnalysis() {
                     </View>
                     <Text style={styles.resultCardTitle}>{t.recommendations}</Text>
                   </View>
-                  
+
                   <View style={styles.recommendationsContainer}>
                     {analysisResult.recommendations.map((recommendation, index) => (
                       <View key={index} style={styles.recommendationItem}>
@@ -604,7 +611,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingTop: 10,
   },
   headerLeft: {
